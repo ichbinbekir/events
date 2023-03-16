@@ -1,4 +1,4 @@
-package events
+package main
 
 type EventEmitter struct {
 	events map[string]chan []any
@@ -10,7 +10,7 @@ func NewEventEmitter() *EventEmitter {
 	return eventemitter
 }
 
-func (eventemitter *EventEmitter) On(eventName string, listener func(...any)) {
+func (eventemitter *EventEmitter) On(eventName string, listener func(args ...any)) {
 	eventemitter.events[eventName] = make(chan []any)
 	go func() {
 		for {
@@ -32,12 +32,4 @@ func (eventemitter *EventEmitter) Emit(eventName string, args ...any) {
 	if eventemitter.events[eventName] != nil {
 		eventemitter.events[eventName] <- args
 	}
-}
-
-func (eventemitter *EventEmitter) Off(eventName string) {
-	eventemitter.events[eventName] = nil
-}
-
-func (eventemitter *EventEmitter) OffAll() {
-	eventemitter.events = nil
 }
