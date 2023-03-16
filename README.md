@@ -9,7 +9,7 @@ import "fmt"
 import "github.com/ichbinbekir/events"
 
 func main() {
-	eventEmitter := NewEventEmitter()
+	eventEmitter := events.NewEventEmitter()
 
 	eventEmitter.On("message", func(args ...any) {
 		fmt.Println(args)
