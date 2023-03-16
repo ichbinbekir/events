@@ -1,4 +1,4 @@
-package main
+package events
 
 type EventEmitter struct {
 	events map[string]chan []any
